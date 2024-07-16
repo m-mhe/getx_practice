@@ -25,7 +25,7 @@ class CountController extends GetxController {
     update();
   }
 
-  void decrement(){
+  void decrement() {
     _tapCount--;
     update();
   }
