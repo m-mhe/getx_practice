@@ -11,12 +11,21 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Counter Application',
-      home: Home(),
+      home: const Home(),
+      initialBinding: ControllerBinder(),
     );
   }
+}
+
+class ControllerBinder extends Bindings{
+  @override
+  void dependencies() {
+    Get.put(CountController());
+  }
+
 }
 
 class Home extends StatefulWidget {
@@ -28,7 +37,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   //final CountController _countController = CountController(); //The Pub-Sub Method
-  final CountController _countController = Get.put(CountController());
+  //final CountController _countController = Get.put(CountController());
+  //final CountController _countController = Get.find<CountController>(); //In this program we did this without creating instance like this
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +73,9 @@ class _HomeState extends State<Home> {
           children: [
             FloatingActionButton(
               onPressed: () {
-                if (_countController.tapCount > 0) {
-                  _countController.decrement();
+                if (Get.find<CountController>().tapCount > 0) {
+                  Get.find<CountController>()
+                      .decrement(); //Also we could do this by creating an instance.
                 }
               },
               backgroundColor: Colors.blue,
@@ -76,7 +87,8 @@ class _HomeState extends State<Home> {
             ),
             FloatingActionButton(
               onPressed: () {
-                _countController.increment();
+                Get.find<CountController>()
+                    .increment(); //Also we could do this by creating an instance.
               },
               backgroundColor: Colors.blue,
               foregroundColor: Colors.white,
