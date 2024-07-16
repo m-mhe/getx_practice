@@ -50,9 +50,9 @@ class _HomeState extends State<Home> {
           );
         }),*/
                 GetBuilder<CountController>(
-          builder: (CountController) {
+          builder: (countController) {
             return Text(
-              '${_countController.tapCount}',
+              '${countController.tapCount}',
               style:
                   const TextStyle(fontSize: 200, fontWeight: FontWeight.w500),
             );
